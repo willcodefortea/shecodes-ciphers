@@ -7,7 +7,6 @@ BASE_DIR = os.path.dirname(__file__)
 sys.path.append(os.path.join(BASE_DIR, 'shecodes_ciphers'))
 
 install_require = [
-    "clint==0.5.1"
 ]
 
 test_require = [

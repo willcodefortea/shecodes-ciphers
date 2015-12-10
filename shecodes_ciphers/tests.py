@@ -7,15 +7,15 @@ from shecodes_ciphers import caeser_simple
 
 class TestCaeserSimple(object):
     def test_encrypt(self):
-        cleartext = 'hidden treasure'
-        assert caeser_simple.encrypt(cleartext, shift=10) == 'rsnnox dbokcebo'
+        cleartext = 'HIDDEN TREASURE'
+        assert caeser_simple.encrypt(cleartext, shift=10) == 'RSNNOX DBOKCEBO'
 
-        cleartext = 'ħiddén tréasuré'
-        assert caeser_simple.encrypt(cleartext, shift=10) == 'ħsnnéx dbékcebé'
+        cleartext = 'ĦIDDÉN TRÉASURÉ'
+        assert caeser_simple.encrypt(cleartext, shift=10) == 'ĦSNNÉX DBÉKCEBÉ'
 
     def test_decrypt(self):
-        cleartext = 'rsnnox dbokcebo'
-        assert caeser_simple.decrypt(cleartext, shift=10) == 'hidden treasure'
+        cleartext = 'RSNNOX DBOKCEBO'
+        assert caeser_simple.decrypt(cleartext, shift=10) == 'HIDDEN TREASURE'
 
-        cleartext = 'ħsnnéx dbékcebé'
-        assert caeser_simple.decrypt(cleartext, shift=10) == 'ħiddén tréasuré'
+        cleartext = 'ĦSNNÉX DBÉKCEBÉ'
+        assert caeser_simple.decrypt(cleartext, shift=10) == 'ĦIDDÉN TRÉASURÉ'
