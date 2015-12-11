@@ -41,10 +41,8 @@ def shift_text(text, shift=13):
 def encrypt(cleartext, shift=13):
     """Decrypt a cipher text.
 
-    This is a simple proxy to `shift_text`.
-
     Args:
-        ciphertext: The encrypted cleartext
+        cleartext: The cleartext
         shift: An integer amount to rotate our string by
     """
     return shift_text(text=cleartext, shift=shift)
@@ -52,9 +50,6 @@ def encrypt(cleartext, shift=13):
 
 def decrypt(ciphertext, shift=13):
     """Decrypt a cipher text.
-
-    This is a simple proxy to `shift_text`, but with a negative version of the
-    shift to move back to our original position.
 
     Args:
         ciphertext: The encrypted cleartext

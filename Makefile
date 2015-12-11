@@ -1,6 +1,6 @@
 bootstrap:
 	pip install -e .
-	pip install "file://`pwd`#egg=she-codes-ciphers[tests]"
+	pip install "file://`pwd`#egg=shecodes-ciphers[tests]"
 
 lint:
 	flake8 shecodes_ciphers/

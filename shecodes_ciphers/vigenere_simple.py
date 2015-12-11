@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 """
-    A simple Caeser cipher implementation.
+    A simple Vigenere cipher implementation.
 """
 from __future__ import unicode_literals
 
@@ -11,29 +11,38 @@ alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 
 def shift_text(text, key='LEMON', encrypt=True):
-    """Apply the Vigenere algorithm to text, either with addition or subtraction
+    """Apply the Vigenere algorithm to text.
+
+    We make use of the operator module to provide the same interface to
+    both encryption and decryption, this way we don't violate DRY!
 
     Args:
         text: The text to encode
         shift: An integer amount to rotate our string by
         encrypt: Which direction are we moving?
     """
+    # Try to match our alphabet more closely
+    text = text.upper()
+    key = key.upper()
+
     operator = add if encrypt else sub
     result = ''
     for index, char in enumerate(text):
         key_index = index % len(key)
         key_char = key[key_index]
-        new_index = operator(alphabet.index(char), alphabet.index(key_char)) % 26
-        new_character = alphabet[new_index]
+        try:
+            new_index = operator(alphabet.index(char), alphabet.index(key_char)) % 26
+            new_character = alphabet[new_index]
+        except ValueError:
+            # Character was not in our alphabet, just use the same one!
+            new_character = char
+
         result += new_character
     return result
 
 
-
 def encrypt(cleartext, key='LEMON'):
-    """Decrypt a cipher text.
-
-    This is a simple proxy to `shift_text`.
+    """Encrypt a clear text.
 
     Args:
         ciphertext: The encrypted cleartext
@@ -44,9 +53,6 @@ def encrypt(cleartext, key='LEMON'):
 
 def decrypt(ciphertext, key='LEMON'):
     """Decrypt a cipher text.
-
-    This is a simple proxy to `shift_text`, but with a negative version of the
-    shift to move back to our original position.
 
     Args:
         ciphertext: The encrypted cleartext
@@ -64,7 +70,10 @@ if __name__ == '__main__':
         key = sys.argv[1]
         message = sys.argv[2]
 
+        is_encrypt = True
+        if len(sys.argv) == 4:
+            is_encrypt = sys.argv[3] == 'encrypt'
+
         message = message.replace(' ', '')
 
-        print encrypt(message, key)
-
+        print shift_text(message, key, is_encrypt)
