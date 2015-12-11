@@ -63,15 +63,6 @@ def decrypt(ciphertext, shift=13):
     return shift_text(text=ciphertext, shift=shift * -1)
 
 
-def sample(text, shift=13):
-    ciphertext = encrypt(text, shift)
-    decrypted = decrypt(ciphertext, shift)
-    print('Original text', text)
-    print('Encrypted', ciphertext)
-    print('Decrypted', decrypted)
-    assert text == decrypted, 'Invalid decryption'
-
-
 if __name__ == '__main__':
     import sys
 
